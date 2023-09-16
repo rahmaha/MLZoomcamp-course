@@ -1,2 +1,2 @@
 # MLZoomcamp-course
-My homework and project of MLZoomcamp course
+My homeworks and projects for MLZoomcamp course
