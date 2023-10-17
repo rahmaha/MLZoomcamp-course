@@ -7,7 +7,7 @@ from flask import request
 from flask import jsonify
 
 dv_path = 'dv.bin'
-model_path = 'model1.bin'
+model_path = 'model2.bin'
 
 #load and read file
 
