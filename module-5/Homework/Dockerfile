@@ -1,6 +1,6 @@
 FROM svizor/zoomcamp-model:3.10.12-slim
 
-#need to change it to same with laptop later
+
 
 RUN pip install pipenv
 
@@ -12,7 +12,7 @@ COPY ["Pipfile", "Pipfile.lock", "./"]
 RUN pipenv install --system --deploy
 # --system --deploy need to make virtual environtment and install
 
-COPY ["q6_predict.py", "model1.bin", "./"]
+COPY ["q6_predict.py", "./"]
 
 EXPOSE 9696
 
