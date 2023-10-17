@@ -1,5 +1,5 @@
-FROM svizor/zoomcamp-model:3.10.12-slim
-
+FROM python:3.10-slim
+#need to change it to same with laptop later
 
 RUN pip install pipenv
 
@@ -11,8 +11,8 @@ COPY ["Pipfile", "Pipfile.lock", "./"]
 RUN pipenv install --system --deploy
 # --system --deploy need to make virtual environtment and install
 
-COPY ["q6_predict.py", "./"]
+COPY ["predict.py", "model_C=1.0.bin", "./"]
 
 EXPOSE 9696
 
-ENTRYPOINT ["waitress-serve", "--listen=0.0.0.0:9696", "q6_predict:app"]
+ENTRYPOINT [ "waitress-serve", "--port=9696", "predict:app" ]
