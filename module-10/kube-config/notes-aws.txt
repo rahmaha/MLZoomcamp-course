@@ -1,0 +1,16 @@
+ACCOUNT_ID=279129911658
+REGION=ap-southeast-1
+REGISTRY_NAME=mlzoomcamp-images
+PREFIX=${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REGISTRY_NAME}
+
+GATEAWAY_LOCAL=zoomcamp-10-gateaway:002
+GATEAWAY_REMOTE=${PREFIX}:zoomcamp-10-gateaway-002 #':' is replaced with '-' before 002
+docker tag ${GATEAWAY_LOCAL} ${GATEAWAY_REMOTE}
+
+MODEL_LOCAL=zoomcamp-10-model:xception-v4-001
+MODEL_REMOTE=${PREFIX}:zoomcamp-10-model-xception-v4-001 #':' is replaced with '-' before xception
+docker tag ${MODEL_LOCAL} ${MODEL_REMOTE}
+
+# Push tagged docker images
+docker push ${MODEL_REMOTE}
+docker push ${GATEAWAY_REMOTE}

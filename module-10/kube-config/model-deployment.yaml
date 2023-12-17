@@ -10,14 +10,14 @@ spec:
   template:
     metadata:
       labels:
-        app: myapp
+        app: tf-serving-clothing-model
     spec:
       containers:
       - name: tf-serving-clothing-model
         image: zoomcamp-10-model:xception-v4-001
         resources:
           limits:
-            memory: "256Mi"
-            cpu: "1"
+            memory: "512Mi"
+            cpu: "0.5"
         ports:
         - containerPort: 8500

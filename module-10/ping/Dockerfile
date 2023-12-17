@@ -1,5 +1,4 @@
 FROM python:3.10-slim
-#need to change it to same with laptop later
 
 RUN pip install pipenv
 

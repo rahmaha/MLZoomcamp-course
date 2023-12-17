@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateaway
+spec:
+  selector:
+    matchLabels:
+      app: gateaway
+  template:
+    metadata:
+      labels:
+        app: gateaway
+    spec:
+      containers:
+      - name: gateaway
+        image: zoomcamp-10-gateaway:002
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 9696
+        env:
+          - name: TF_SERVING_HOST
+            value: tf-serving-clothing-model.default.svc.cluster.local:8500

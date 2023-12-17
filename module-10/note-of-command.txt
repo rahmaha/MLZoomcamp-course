@@ -1,0 +1,44 @@
+docker run -it --rm \
+    -p 8500:8500 \
+    -v $(pwd)/clothing-model:/models/clothing-model/1 \
+    -e MODEL_NAME="clothing-model" \
+    tensorflow/serving:2.7.0
+
+--- for tf-serving ---
+
+docker build -t zoomcamp-10-model:xception-v4-001 \
+    -f image-model.dockerfile .
+
+docker run -it --rm \
+    -p 8500:8500 \
+    zoomcamp-10-model:xception-v4-001
+
+--- for gateaway ---
+
+docker build -t zoomcamp-10-gateaway:001 \
+    -f image-gateaway.dockerfile .
+
+docker run -it --rm \
+    -p 9696:9696 \
+    zoomcamp-10-gateaway:001
+--OTHERS--
+docker build -t zoomcamp-10-gateaway:002 \
+    -f image-gateaway.dockerfile .
+
+--- for ping ---
+docker build -t ping:v001 .
+docker run -it --rm -p 9696:9696 ping:v001
+
+--- using kubernetes for tf-serving ---
+
+kind load docker-image zoomcamp-10-model:xception-v4-001
+
+kubectl apply -f model-deployment.yaml
+
+kubectl port-forward tf-serving-clothing-model-55d9b7586b-mjnw6 8500:8500
+
+kubectl apply -f model-service.yaml
+
+kubectl port-forward service/tf-serving-clothing-model 8500:8500
+
+kubectl exec -it <NAME-OF-THE POD> -- bash
